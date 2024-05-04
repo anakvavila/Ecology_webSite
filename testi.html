@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>თქვენი აზრი test</title>
+    <link rel="icon" type="image/png" href="Screenshot (14).png" />
+    <style>
+         body{
+
+background-color: rgb(0, 0, 0);
+}
+
+#text{
+    position: absolute;
+    color: white;
+    width:  550px;
+    margin-left: 500px;
+    margin-top: -330px;
+}
+
+#satauri{
+    position: absolute;
+    color: white;
+    margin-top: -450px;
+    margin-left: 565px;
+}
+
+#background{
+    width: 1500px;
+    height: 500px;
+    background-blend-mode:darken;
+    margin-left: 6px;
+    border-radius: 15px;
+}
+
+#input{
+    width: 200px;
+    height: 30px;
+    border-color: aqua;
+    margin-top: 30px;
+    margin-left: 50px;
+}
+
+#label{
+    margin-top: 50px;
+    margin-left: 50px;
+    color: white;
+}
+
+#button{
+    width: 80px;
+    height: 35px;
+    background-color: greenyellow;
+    border-radius: 5px;
+}
+
+#commentContainer{
+    background-color: white;
+    color: black;
+    width: fit-content;
+    width: fit-content;
+    margin-top: 50px;
+    margin-left: 50px;
+    border-radius: 5px;
+}
+
+#user{
+margin-top: 50px;
+margin-left: 50px;
+}
+    </style>
+</head>
+<body>
+    <img src="background.webp" id="background">
+    <h2 id="satauri">ეკოლოგიური პრობლემები</h2>
+    <h3 id="text">ეკოლოგიური პრობლემები, როგორიცაა ტყეების გაჩეხვა, დაბინძურება და 
+        კლიმატის ცვლილება, ძირითადად გამოწვეულია ადამიანის საქმიანობით, რაც 
+        იწვევს ჰაბიტატის დაკარგვას, ბიომრავალფეროვნების შემცირებას და ბუნებრივ 
+        ეკოსისტემების დარღვევას. გადაუდებელი მოქმედება აუცილებელია ამ საკითხების 
+        გადასაჭრელად მდგრადი პრაქტიკის, კონსერვაციის ძალისხმევისა და პოლიტიკის 
+        ცვლილებების გზით, რაც უზრუნველყოფს როგორც გარემოს, ასევე მომავალი თაობის 
+        ჯანმრთელობას და კეთილდღეობას. სურვილისამებრ გთხოვთ დააფიქსიროთ თქვენი აზრი და იდეები
+        ამ პრობლემების გადასაჭრელად!</h3>
+       
+
+        <h3 id="label">კომენტარები</h3>
+        <input type="text" name="username" id="user" placeholder="მომხმარებლის სახელი"> <br> <!--user is saxeli-->
+        <input type="text" id="input" placeholder="დატოვეთ კომენტარი">
+        <button id="button">გაგზავნა</button>
+
+        <!--komentarebistvis-->
+
+        <div id="commentContainer"></div>
+
+        <script>
+    
+   // Function to add a new comment
+function addComment() {
+    const input = document.getElementById("input").value;
+    const username = document.getElementById("user").value; // Get user's name
+
+    // Create a new comment object with username and input
+    const comment = {
+        username: username,
+        text: input
+    };
+
+    // Save the comment to localStorage
+    saveComment(comment);
+
+    // Render the comment
+    renderComment(comment);
+
+    // Clear the input fields
+    document.getElementById("input").value = '';
+    document.getElementById("user").value = '';
+}
+
+// Function to save a comment to localStorage
+function saveComment(comment) {
+    // Get existing comments from localStorage or initialize as an empty array
+    let comments = JSON.parse(localStorage.getItem('comments')) || [];
+
+    // Add the new comment to the array
+    comments.push(comment);
+
+    // Save the updated comments array back to localStorage
+    localStorage.setItem('comments', JSON.stringify(comments));
+}
+
+// Function to render a comment
+function renderComment(comment) {
+    // Create a new comment element
+    const commentElement = document.createElement("div");
+
+    // Set the text content of the comment element with username and input
+    commentElement.textContent = `${comment.username}: ${comment.text}`;
+
+    // Append the comment to the comment container
+    document.getElementById("commentContainer").appendChild(commentElement);
+}
+
+// Function to load comments from localStorage and render them
+function loadComments() {
+    // Get comments from localStorage
+    const comments = JSON.parse(localStorage.getItem('comments')) || [];
+
+    // Render each comment
+    comments.forEach(comment => renderComment(comment));
+}
+
+// Attach event listener to the button
+document.getElementById("button").addEventListener('click', addComment);
+
+// Load comments when the page is loaded
+loadComments();
+
+
+
+
+        </script>
+</body>
+</html>
